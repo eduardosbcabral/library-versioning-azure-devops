@@ -1,0 +1,11 @@
+id: 2
+name: LibraryTestOne
+description: The variable group that contains the application staging environment values
+preffix: LibraryTestOne_
+variables:
+- name: VariableOne
+  value: test
+- name: VariableTwo
+  value: test
+- name: VariableThree
+  value: test

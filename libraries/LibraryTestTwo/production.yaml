@@ -1,0 +1,11 @@
+id: 3
+name: LibraryTestTwo
+description: The variable group that contains the application production environment values
+preffix: LibraryTestTwo_
+variables:
+- name: VariableOne
+  value: test
+- name: VariableTwo
+  value: test
+- name: VariableThree
+  value: test

@@ -1,5 +1,0 @@
-applications:
-- name: library_test_one
-  path: './LibraryTestOne'
-- name: library_test_two
-  path: './LibraryTestTwo'

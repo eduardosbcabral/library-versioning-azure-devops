@@ -9,9 +9,7 @@ try {
   const application_arg = process.argv[2]
   const file_arg = process.argv[3]
 
-  const applications = getApplications()
-
-  const { id, name, description, preffix, variables } = getApplicationYaml(application_arg, file_arg, applications)
+  const { id, name, description, preffix, variables } = getApplicationYaml(application_arg, file_arg)
 
   const obj = buildRequestVariables(preffix, variables)
 
@@ -34,36 +32,11 @@ function validateArguments() {
   }
 }
 
-function getApplications() {
-  try {
-    const fileContents = fs.readFileSync('./applications.yaml', 'utf8')
-    const data = yaml.load(fileContents)
-    const applications = data.applications
-    validateApplicationsYaml(applications)
-    return applications
-  } catch(e) {
-    console.log(e)
-    process.exit()
-  }
-}
-
-function validateApplicationsYaml(applications) {
-  for(const app of applications) {
-    if(!app.name) {
-      throw new Error('Application name is required.')
-    }
-    if(!app.path) {
-      throw new Error(`[${app.name}] Application path is required.`)
-    }
-  }
-}
-
-function getApplicationYaml(applicationName, file_arg, applications) {
-  const application = applications.find(x => x.name === applicationName)
-  const path = application.path
+function getApplicationYaml(applicationName, file_arg) {
 
   try {
-    const libYamlContents = fs.readFileSync('./libraries/' + path + '/' + file_arg + '.yaml', 'utf8')
+    const yamlFilePath = './libraries/' + applicationName + '/' + file_arg + '.yaml'
+    const libYamlContents = fs.readFileSync(yamlFilePath, 'utf8')
     return yaml.load(libYamlContents)
   } catch(e) {
     console.log(e)
